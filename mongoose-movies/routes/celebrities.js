@@ -43,4 +43,14 @@ router.post('/new', function(req, res, next) {
     .catch(err => console.log(err));
 });
 
+//Post '/celebrities/new'
+router.post('/:id/delete', function(req, res, next) {
+  console.log('req.body', req.body);
+  const { _id } = req.body;
+  Celebrity.findByIdAndRemove(_id)
+    .remove(_id)
+    .then(data => res.redirect('/'))
+    .catch(err => console.log(err));
+});
+
 module.exports = router;
