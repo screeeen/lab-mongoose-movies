@@ -45,11 +45,11 @@ router.post('/new', function(req, res, next) {
 
 //Post '/celebrities/new'
 router.post('/:id/delete', function(req, res, next) {
-  console.log('req.body', req.body);
-  const { _id } = req.body;
-  Celebrity.findByIdAndRemove(_id)
-    .remove(_id)
-    .then(data => res.redirect('/'))
+  const { id } = req.params;
+  console.log('req.body', id);
+
+  Celebrity.findByIdAndRemove(id)
+    .then((data) => res.redirect('/'))
     .catch(err => console.log(err));
 });
 

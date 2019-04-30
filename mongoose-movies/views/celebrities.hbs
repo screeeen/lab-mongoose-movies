@@ -6,8 +6,8 @@
     <a href="/celebrities/{{this._id}}">{{this.name}}</a>
     <a href="/celebrities/{{this._id}}">{{this.occupation}}</a>
     <a href="/celebrities/{{this._id}}">{{this.catchPhrase}}</a>
-    <form action="/:id/delete" method="post">
-          <button type="submit">DELETE</button>
-
+    <form action="/{{this._id}}/delete" method="post">
+        <button type="submit">DELETE</button>
+    </form>
 </p>
 {{/each}}
