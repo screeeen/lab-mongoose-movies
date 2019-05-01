@@ -1,0 +1,13 @@
+<h2>Edit Movie</h2>
+<form action="/celebrities/{{movie}}/edit" method="post">
+  <label for="">Title:</label>
+  <input type="text" name="title" placeholder={{movie.title}}>
+  <br>
+  <label for="">Genre:</label>
+  <input type="text" name="genre" placeholder={{movie.genre}}>
+  <br>
+  <label for="">Plot:</label>
+  <input type="text" name="plot" placeholder={{movie.plot}}>
+  <br>
+  <button type="submit">Confirm changes to {{movie}} </button>
+</form>

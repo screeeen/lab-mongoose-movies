@@ -1,0 +1,23 @@
+<h1>Celebrities</h1>
+
+{{#each allTheCelebritiesFromDB}}
+<p class='celebrities-title'>
+    {{!-- <a href="/celebrities/edit?_id={{this._id}}" class="edit-button">EDIT</a> --}}
+    <a href="/celebrities/show/{{this._id}}">{{this.name}}</a>
+    <a href="/celebrities/show/{{this._id}}">{{this.occupation}}</a>
+    <a href="/celebrities/show/{{this._id}}">{{this.catchPhrase}}</a>
+    
+    <form action="/celebrities/{{this._id}}/delete" method="post">
+        <button class="button" type="submit">DELETE</button>
+    </form>
+    <form action="/celebrities/{{this._id}}/edit">
+        <button class="button" type="submit">EDIT {{this.name}}</button>
+    </form>
+</p>
+{{/each}}
+<p>------------------------------------------------</p>
+
+{{!-- <a class="button" href='/celebrities'>List of Celebrities</a> --}}
+<a class="button" href='/celebrities/new'>Add a new celebrity</a>
+<br>
+<a class="button" href='../'>Return</a>
