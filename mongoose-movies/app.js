@@ -1,12 +1,22 @@
+'use strict'
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const router = require('./routes/index');
-// const celebrities = require('./routes/celebrities');
-const mongoose = require('mongoose');
 
+const mongoose = require('mongoose');
+const config =require('./config/config');
+
+
+// Session and Passport modules
+const session = require("express-session");
+const passport = require("./config/passport-config");  // passport module setup and initial load
+const passportStrategySetup = require('./config/passport-local-strategy');
+
+const router = require('./routes/index');
+// const celebritiesRouter = require('./routes/celebrities');
 
 mongoose.connect(`mongodb://localhost/celebrities`, {
   keepAlive: true,
@@ -27,8 +37,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: config.SESSION_KEY,
+  resave: false,
+  saveUninitialized: false
+}));
+
+// PASSPORT LINES MUST BE BELOW SESSION
+
+//	Auth Setup - how is the user being authenticated during login
+passport.use(passportStrategySetup);
+
+// Creates Passport's methods and properties on `req` for use in out routes
+app.use(passport.initialize());
+
+// Invokes / Sets Passport to manage user session
+app.use(passport.session());
+
+
+
 app.use('/', router);
-// app.use('/celebrities', celebrities);
+// app.use('/celebrities', celebritiesRouter);
 
 
 // catch 404 and forward to error handler
